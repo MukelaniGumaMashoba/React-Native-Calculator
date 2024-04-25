@@ -1,5 +1,6 @@
 import React from 'react';
 import Calculator from './Screens/Calculator.js';
+import { CalculateBMI } from './Screens/CalBMI.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -20,6 +21,17 @@ export default function App() {
             ),
           }}
         />
+        <Tab.Screen
+          name="BMI"
+          component={CalculateBMI}
+          options={{
+            tabBarLabel: 'BMI',
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome5 name="calculator" size={size} color={color} />
+            ),
+          }}
+        />
+
       </Tab.Navigator>
     </NavigationContainer>
   );
