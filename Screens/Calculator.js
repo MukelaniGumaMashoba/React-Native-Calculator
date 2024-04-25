@@ -12,6 +12,8 @@ const CalculatorScreen = ({ navigation }) => {
       setDisplayValue(prevValue => {
         if (prevValue === '0') {
           return `${num}`;
+        } else if (prevValue.includes('.') && num === '.') {
+          return prevValue;
         } else {
           return `${prevValue}${num}`;
         }
@@ -32,27 +34,27 @@ const CalculatorScreen = ({ navigation }) => {
   const handleEqualInput = () => {
     if (operator && firstInputValue && secInputValue) {
       let result;
-  
+
       if (operator === '+') {
         result = firstInputValue + secInputValue;
-      } 
+      }
       else if (operator === '-') {
         result = firstInputValue - secInputValue;
-      } 
+      }
       else if (operator === '*') {
         result = firstInputValue * secInputValue;
-      } 
+      }
       else if (operator === '/') {
         result = firstInputValue / secInputValue;
       }
-  
+
       setDisplayValue(`${result}`);
       setfirstInputValue(result);
       setsecInputValue(null);
       setOperator(null);
     }
   };
-  
+
 
   const handleClearInput = () => {
     setDisplayValue('0');
@@ -69,7 +71,7 @@ const CalculatorScreen = ({ navigation }) => {
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.row}>
-          <TouchableOpacity style={styles.button} onPress={handleClearInput}>
+            <TouchableOpacity style={styles.button} onPress={handleClearInput}>
               <Text style={styles.buttonText}>x</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => handleNumberInput(7)}>
@@ -125,6 +127,9 @@ const CalculatorScreen = ({ navigation }) => {
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleClearInput}>
               <Text style={styles.buttonText}>C</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => handleNumberInput(".")}>
+              <Text style={styles.buttonText}>.</Text>
             </TouchableOpacity>
           </View>
         </View>
